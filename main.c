@@ -8,5 +8,5 @@ int main()
 }
 void print()
 {
-	_printf("%d %c %s", 1, 'c', "faisal");
+	_printf("%d\n \n%c \n%s", 1, 'c', "faisal");
 }
