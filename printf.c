@@ -3,18 +3,24 @@
 #include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
+#include "main.h"
 /**
  * print_char - function name
  * @arguments: takes arguments
  * Description - this is the description
  * Return: return type
  */
+void print_r(va_list arguments)
+{
+	(void)arguments;
+	write(1, "%r", 2);
+}
 void print_char(va_list arguments)
 {
 	char c;
 
 	c = va_arg(arguments, int);
-	putchar(c);
+	write(1, &c, 1);
 }
 /**
  * print_int - function name
@@ -22,12 +28,13 @@ void print_char(va_list arguments)
  * Description - this is the description
  * Return: return type
  */
-void print_int(va_list arguments, char *output, int *length)
+void print_int(va_list arguments)
 {
 	int i = va_arg(arguments, int);
-	*length = sprintf(output, "%d", i);
+	char output[BUFFER_SIZE];
+	int length = sprintf(output, "%d", i);
 
-	write(1, output, *length);
+	write(1, output, length);
 }
 /**
  * print_double - function name
@@ -35,12 +42,13 @@ void print_int(va_list arguments, char *output, int *length)
  * Description - this is the description
  * Return: return type
  */
-void print_double(va_list arguments, char *output, int *length)
+void print_double(va_list arguments)
 {
 	double flo = va_arg(arguments, double);
-	*length = sprintf(output, "%f", flo);
+	char output[BUFFER_SIZE];
+	int length = sprintf(output, "%f", flo);
 
-	write(1, output, *length);
+	write(1, output, length);
 }
 /**
  * print_string - function name
@@ -48,22 +56,13 @@ void print_double(va_list arguments, char *output, int *length)
  * Description - this is the description
  * Return: return type
  */
-void print_string(va_list arguments, char *output, int *length)
+void print_string(va_list arguments)
 {
 	char *ch = va_arg(arguments, char*);
-
-	if (ch == NULL)
-	{
-		*length = write(1, "(nil)", 5);
-	}
-	else
-	{
-		*length = sprintf(output, "%s", ch);
-		write(1, output, *length);
-	}
+	write(1, ch, strlen(ch));
 }
 /**
- * print_all - function name
+ * _printf - function name
  * @format: takes cahr
  * Description - this is the description
  * Return: return type
@@ -73,10 +72,7 @@ int _printf(const char *format, ...)
 	va_list arguments;
 	int i;
 	int format_l;
-	char output[40];
-	int length;
 
-	length = 0;
 	format_l = strlen(format);
 	va_start(arguments, format);
 	for (i = 0; i < format_l; i++)
@@ -90,32 +86,35 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 'c')
 			{
-				char c = va_arg(arguments, int);
-
-				length = write(1, &c, 1);
+				print_char(arguments);
 			}
 			else if (format[i] == 's')
 			{
-				print_string(arguments, output, &length);
+				print_string(arguments);
 			}
 			else if (format[i] == 'd')
 			{
-				print_int(arguments, output, &length);
+				print_int(arguments);
 			}
 			else if (format[i] == 'f')
 			{
-				print_double(arguments, output, &length);
+				print_double(arguments);
 			}
 			else if (format[i] == 'r')
 			{
-				length = write(1, "%r", 2);
+				print_r(arguments);
+			}
+			else
+			{
+				write(1, "%", 1);
+				write(1, &format[i], 1);
 			}
 		}
 		else
 		{
-			length =  write(1, &format[i], 1);
+			write(1, &format[i], 1);
 		}
 	}
 	va_end(arguments);
-	return (length);
+	return (0);
 }
