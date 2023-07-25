@@ -39,7 +39,7 @@ int _printf(const char *format, ...)
 			{
 				_putchar('%');
 				length++;
-			break;
+				break;
 			}
 			else if (format[i] == 'c')
 			{
@@ -66,6 +66,31 @@ int _printf(const char *format, ...)
 				{
 					_putchar(str[j]);
 					length++;
+				}
+			}
+			else if (format[i] == 'd' || format[i] == 'i')
+			{
+				int num = va_arg(arguments, int);
+				int divisor = 1;
+				int temp = num;
+
+				if (num < 0)
+				{
+					_putchar('-');
+					length++;
+					num = -num;
+				}
+				for (temp = num; temp < 9; temp /= 10)
+				{
+					divisor *= 10;
+				}
+				for (; divisor > 0; divisor /= 10)
+				{
+					int digit = num / divisor;
+
+					_putchar(digit + '0');
+					length++;
+					num %= divisor;
 				}
 			}
 			else if (format[i] == '%')
