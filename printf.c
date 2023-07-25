@@ -176,52 +176,64 @@ int _printf(const char *format, ...)
 			else if (format[i] == 'c')
 			{
 				print_char(arguments);
+				length +=1;
 			}
 			else if (format[i] == 's')
 			{
 				print_string(arguments);
+				length += strlen(va_arg(arguments, char*));
 			}
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
 				print_int(arguments);
+				length += snprintf(NULL, 0, "%d", va_arg(arguments, int));
 			}
 			else if (format[i] == 'f')
 			{
 				print_double(arguments);
+				length += snprintf(NULL, 0, "%f", va_arg(arguments, double));
 			}
 			else if (format[i] == 'u')
 			{
 				print_u(arguments);
+				length += snprintf(NULL, 0, "%u", va_arg(arguments, unsigned int));
 			}
 			else if (format[i] == 'o')
 			{
 				print_o(arguments);
+				length += snprintf(NULL, 0, "%o", va_arg(arguments, unsigned int));
 			}
 			else if (format[i] == 'x')
 			{
 				print_x(arguments);
+				length += snprintf(NULL, 0, "%x", va_arg(arguments, unsigned int));
 			}
 			else if (format[i] == 'X')
 			{
 				print_hex(arguments);
+				length += snprintf(NULL, 0, "%X", va_arg(arguments, unsigned int));
 			}
 			else if (format[i] == '%')
 			{
 				print_percent(arguments);
+				length += 1;
 			}
 			else if (format[i] == 'p')
 			{
 				print_address(arguments);
+				length += snprintf(NULL, 0, "%p", va_arg(arguments, void*));
 			}
 			else
 			{
 				write(1, "%", 1);
 				write(1, &format[i], 1);
+				length += 2;
 			}
 		}
 		else
 		{
 			write(1, &format[i], 1);
+			length += 1;
 		}
 	}
 	va_end(arguments);
