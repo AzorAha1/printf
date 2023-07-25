@@ -81,6 +81,11 @@ int _printf(const char *format, ...)
 				{
 					return (-1);
 				}
+				for (j = 0; output[j] != '\0'; j++)
+				{
+					_putchar(output[j]);
+					length++;
+				}
 				
 			}
 			else if (format[i] == '%')
