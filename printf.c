@@ -74,10 +74,10 @@ int _printf(const char *format, ...)
 			{
 				int num = va_arg(arguments, int);
 				char output[BUFFER_SIZE];
-				int length;
+				int conversion_length;
 
-				length = snprintf(output, BUFFER_SIZE, "%d", num);
-				if (length < 0 || length >= BUFFER_SIZE)
+				conversion_length = snprintf(output, BUFFER_SIZE, "%d", num);
+				if (conversion_length < 0 || conversion_length >= BUFFER_SIZE)
 				{
 					return (-1);
 				}
