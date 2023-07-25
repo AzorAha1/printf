@@ -1,5 +1,7 @@
 #include <unistd.h>
 #include <stdarg.h>
+#include "main.h"
+#include <stdio.h>
 /**
  * _putchar - function name
  * @c: c
@@ -71,27 +73,15 @@ int _printf(const char *format, ...)
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
 				int num = va_arg(arguments, int);
-				int divisor = 1;
-				int temp = num;
+				char output[BUFFER_SIZE];
+				int length;
 
-				if (num < 0)
+				length = snprintf(output, BUFFER_SIZE, "%d", num);
+				if (length < 0 || length >= BUFFER_SIZE)
 				{
-					_putchar('-');
-					length++;
-					num = -num;
+					return (-1);
 				}
-				for (temp = num; temp < 9; temp /= 10)
-				{
-					divisor *= 10;
-				}
-				for (; divisor > 0; divisor /= 10)
-				{
-					int digit = num / divisor;
-
-					_putchar(digit + '0');
-					length++;
-					num %= divisor;
-				}
+				
 			}
 			else if (format[i] == '%')
 			{
