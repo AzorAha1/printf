@@ -8,7 +8,6 @@
  */
 int _putchar(char c)
 {
-	c = va_arg(arguments, int);
 	return (write(1, &c, 1));
 }
 /**
@@ -44,6 +43,8 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 'c')
 			{
+				char c = va_arg(arguments, int);
+
 				_putchar(c);
 				length++;
 			}
