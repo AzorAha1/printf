@@ -8,7 +8,8 @@
  */
 int _putchar(char c)
 {
-	return write(1, &c, 1);
+	c = va_arg(arguments, int);
+	return (write(1, &c, 1));
 }
 /**
  * _printf - function name
@@ -39,17 +40,17 @@ int _printf(const char *format, ...)
 			{
 				_putchar('%');
 				length++;
-				break;
+			break;
 			}
 			else if (format[i] == 'c')
 			{
-				char c = va_arg(arguments, int);
 				_putchar(c);
 				length++;
 			}
 			else if (format[i] == 's')
 			{
 				char *str = va_arg(arguments, char*);
+
 				for (j = 0; str[j] != '\0'; j++)
 				{
 					_putchar(str[j]);
