@@ -52,6 +52,16 @@ int _printf(const char *format, ...)
 			{
 				char *str = va_arg(arguments, char*);
 
+				if (str == NULL)
+				{
+					_putchar('(');
+					_putchar('n');
+					_putchar('u');
+					_putchar('l');
+					_putchar('l');
+					_putchar(')');
+					length += 6;
+				}
 				for (j = 0; str[j] != '\0'; j++)
 				{
 					_putchar(str[j]);
