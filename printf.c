@@ -72,7 +72,7 @@ int _printf(const char *format, ...)
 				length++;
 				break;
 			}
-			else if (format[i] == 'c')
+			if (format[i] == 'c')
 			{
 				char c = va_arg(arguments, int);
 
