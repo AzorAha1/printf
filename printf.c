@@ -26,7 +26,7 @@ void print_s(char *str)
 	}
 	else
 	{
-		for (j = o; str[j] != '\0'; j++)
+		for (j = 0; str[j] != '\0'; j++)
 		{
 			_putchar(str[j]);
 		}	
@@ -45,6 +45,7 @@ int _printf(const char *format, ...)
 	int length = 0;
 	int i;
 	int j;
+	char *str;
 
 	va_start(arguments, format);
 
