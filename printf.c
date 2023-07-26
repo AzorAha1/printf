@@ -39,6 +39,7 @@ int print_s(char *str)
 		for (j = 0; str[j] != '\0'; j++)
 		{
 			_putchar(str[j]);
+			length++;
 		}
 	}
 	return (length);
