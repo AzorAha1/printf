@@ -22,7 +22,8 @@ int print_s(char *str)
 {
 	int j;
 	int length;
-	
+
+	length = 0;
 	if (str == NULL)
 	{
 		_putchar('(');
