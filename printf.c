@@ -12,10 +12,17 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+/**
+ * print_s - function name
+ * @str: parameter
+ * Description - this is the description
+ * Return: return type
+ */
 void print_s(char *str)
 {
 	int j;
-       	if (str == NULL)
+
+	if (str == NULL)
 	{
 		_putchar('(');
 		_putchar('n');
@@ -29,7 +36,7 @@ void print_s(char *str)
 		for (j = 0; str[j] != '\0'; j++)
 		{
 			_putchar(str[j]);
-		}	
+		}
 	}
 
 }
@@ -103,7 +110,6 @@ int _printf(const char *format, ...)
 					_putchar(output[j]);
 					length++;
 				}
-				
 			}
 			else if (format[i] == '%')
 			{
