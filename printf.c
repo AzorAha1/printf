@@ -12,6 +12,27 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+void print_s(char *str)
+{
+	int j;
+       	if (str == NULL)
+	{
+		_putchar('(');
+		_putchar('n');
+		_putchar('u');
+		_putchar('l');
+		_putchar('l');
+		_putchar(')');
+	}
+	else
+	{
+		for (j = o; str[j] != '\0'; j++)
+		{
+			_putchar(str[j]);
+		}	
+	}
+
+}
 /**
  * _printf - function name
  * @format: format
@@ -52,16 +73,11 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 's')
 			{
-				char *str = va_arg(arguments, char*);
+				str = va_arg(arguments, char*);
+				print_s(str);
 
 				if (str == NULL)
 				{
-					_putchar('(');
-					_putchar('n');
-					_putchar('u');
-					_putchar('l');
-					_putchar('l');
-					_putchar(')');
 					length += 6;
 				}
 				for (j = 0; str[j] != '\0'; j++)
