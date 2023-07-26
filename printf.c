@@ -88,10 +88,13 @@ int _printf(const char *format, ...)
 				{
 					length += 6;
 				}
-				for (j = 0; str[j] != '\0'; j++)
+				else
 				{
-					_putchar(str[j]);
-					length++;
+					for (j = 0; str[j] != '\0'; j++)
+					{
+						_putchar(str[j]);
+						length++;
+					}
 				}
 			}
 			else if (format[i] == 'd' || format[i] == 'i')
