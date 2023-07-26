@@ -18,10 +18,11 @@ int _putchar(char c)
  * Description - this is the description
  * Return: return type
  */
-void print_s(char *str)
+int print_s(char *str)
 {
 	int j;
-
+	int length;
+	
 	if (str == NULL)
 	{
 		_putchar('(');
@@ -30,6 +31,7 @@ void print_s(char *str)
 		_putchar('l');
 		_putchar('l');
 		_putchar(')');
+		length += 6;
 	}
 	else
 	{
@@ -38,6 +40,7 @@ void print_s(char *str)
 			_putchar(str[j]);
 		}
 	}
+	return (length);
 
 }
 /**
@@ -52,7 +55,6 @@ int _printf(const char *format, ...)
 	int length = 0;
 	int i;
 	int j;
-	char *str;
 
 	va_start(arguments, format);
 
@@ -81,21 +83,10 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] == 's')
 			{
-				str = va_arg(arguments, char*);
-				print_s(str);
+				char *str = va_arg(arguments, char*);
+				int str_length = print_s(str);
 
-				if (str == NULL)
-				{
-					length += 6;
-				}
-				else
-				{
-					for (j = 0; str[j] != '\0'; j++)
-					{
-						_putchar(str[j]);
-						length++;
-					}
-				}
+				length += str_length;
 			}
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
